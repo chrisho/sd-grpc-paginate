@@ -38,7 +38,7 @@ func SetPagingDefaultOptions(in *PageOptions) *PageOptions {
 	}
 	// set default first currPage : 1
 	if in.CurrPageNumber < 1 {
-		in.CurrPageNumber = in.PageNumber
+		in.CurrPageNumber = 0
 	}
 	// 设置默认查询字段、排序
 	in.SortField, in.SortFieldTo = SetPagingModeByPrimarySelectFieldAndSort(in.SortField, in.SortFieldTo)
@@ -96,7 +96,9 @@ func GetPagingModeByPrimaryOptions(in *PageOptions) (offset, limit int32,symbol 
 	limit = in.PageSize
 	symbol = " < "
 	if in.SortFieldTo == "desc" {
-		if in.PageNumber > in.CurrPageNumber { // 向下翻页
+		if in.CurrPageNumber == 0 {
+			symbol = " < "
+		}else if in.PageNumber > in.CurrPageNumber { // 向下翻页
 			offset = (in.PageNumber - in.CurrPageNumber -1 ) * limit
 			symbol = " < "
 		} else { //向上翻页
@@ -104,7 +106,9 @@ func GetPagingModeByPrimaryOptions(in *PageOptions) (offset, limit int32,symbol 
 			symbol = " >= "
 		}
 	} else {
-		if in.PageNumber > in.CurrPageNumber { // 向下翻页
+		if in.CurrPageNumber == 0 {
+			symbol = " > "
+		}else if in.PageNumber > in.CurrPageNumber { // 向下翻页
 			offset = (in.PageNumber - in.CurrPageNumber -1 ) * limit
 			symbol = " > "
 		} else { //向上翻页
