@@ -4,7 +4,7 @@ package paginate;
 
 /**
  * @apiDefine PageOptionsDefine
- * @apiParam (PageOptions) {Struct} PageOptions 分页请求选项
+ * @apiParam (PageOptions) {Struct} PageOptions 分页请求选项（滚动分页：不传CurrPageNumber，页码分页：不传：SortValue、CurrPageNumber，大数据时页码分页：传：SortValue、CurrPageNumber）
  * @apiParam (PageOptions) {Int32} [PageOptions.PageSize] 每页显示：默认 10 条
  * @apiParam (PageOptions) {Int32} [PageOptions.PageNumber] 第几页；默认 1 (页码分页)
  * @apiParam (PageOptions) {Int32} [PageOptions.CurrPageNumber] 当前页；默认 1 (页码分页)

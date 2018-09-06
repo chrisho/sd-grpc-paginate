@@ -98,6 +98,9 @@ func GetPagingModeByPrimaryOptions(in *PageOptions) (offset, limit int32,symbol 
 	if in.SortFieldTo == "desc" {
 		if in.CurrPageNumber == 0 {
 			symbol = " < "
+			if in.SortValue == 0 {
+				offset = (in.PageNumber -1 ) * limit
+			}
 		}else if in.PageNumber > in.CurrPageNumber { // 向下翻页
 			offset = (in.PageNumber - in.CurrPageNumber -1 ) * limit
 			symbol = " < "
@@ -108,6 +111,9 @@ func GetPagingModeByPrimaryOptions(in *PageOptions) (offset, limit int32,symbol 
 	} else {
 		if in.CurrPageNumber == 0 {
 			symbol = " > "
+			if in.SortValue == 0 {
+				offset = (in.PageNumber -1 ) * limit
+			}
 		}else if in.PageNumber > in.CurrPageNumber { // 向下翻页
 			offset = (in.PageNumber - in.CurrPageNumber -1 ) * limit
 			symbol = " > "
