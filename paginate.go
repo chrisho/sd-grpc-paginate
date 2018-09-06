@@ -38,7 +38,7 @@ func SetPagingDefaultOptions(in *PageOptions) *PageOptions {
 	}
 	// set default first currPage : 1
 	if in.CurrPageNumber < 1 {
-		in.CurrPageNumber = 1
+		in.CurrPageNumber = 0
 	}
 	// 设置默认查询字段、排序
 	in.SortField, in.SortFieldTo = SetPagingModeByPrimarySelectFieldAndSort(in.SortField, in.SortFieldTo)
