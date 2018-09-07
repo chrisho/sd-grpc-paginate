@@ -163,6 +163,7 @@ func GetSortValue(s interface{}, sortField string) int64 {
 
 // Set Paging Result
 func SetPagingResult(in *PageOptions, TotalRecords int32, SortValue int64) (paginate PageResult) {
+	SetPagingDefaultOptions(in)
 
 	paginate.TotalRecords = TotalRecords
 
