@@ -4,6 +4,7 @@ import (
 	"strings"
 	"github.com/chrisho/mosquito/utils"
 	"reflect"
+	"github.com/jinzhu/gorm"
 )
 
 const (
@@ -14,8 +15,16 @@ const (
 
 const SortFieldSuffix = "_sort"
 
+func GetPaginate(db *gorm.DB, tname string,in *PageOptions)*gorm.DB{
+	offset, limit,symbol := GetPagingOptions(in)
+	field := tname +"." + in.SortField
+	if in.SortValue > 0 {
+		db = db.Where(field + symbol + "?",in.SortValue)
+	}
+	return db.Order(field + " " + in.SortFieldTo).Offset(offset).Limit(limit)
+}
 // 获取分页选项
-func GetPagingOptions(in *PageOptions, PagingMode ...int) (offset, limit int32, symbol string) {
+func GetPagingOptions(in *PageOptions) (offset, limit int32, symbol string) {
 
 	SetPagingDefaultOptions(in)
 
