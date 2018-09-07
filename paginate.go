@@ -81,11 +81,12 @@ func SetPagingModeByPrimarySelectFieldAndSort(SortField, SortFieldTo string) (fi
 }
 
 // structPointer 必须是 struct 的 指针
-func PagingOptionsFieldNameIsValid(structPointer interface{}, fieldName string) bool {
+func PagingOptionsFieldNameIsValid(structPointer interface{}, in *PageOptions) bool {
+	sortField, _ := SetPagingModeByPrimarySelectFieldAndSort(in.SortField, in.SortFieldTo)
 
 	sElem := reflect.ValueOf(structPointer).Elem()
 
-	return sElem.FieldByName(utils.CamelString(fieldName)).IsValid()
+	return sElem.FieldByName(utils.CamelString(sortField)).IsValid()
 }
 
 /*
