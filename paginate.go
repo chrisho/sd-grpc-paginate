@@ -138,8 +138,9 @@ func GetPagingModeByPrimaryOptions(in *PageOptions) (offset, limit int32,symbol 
 }
 
 //panic if s is not a struct pointer
-func GetSortValue(s interface{}, sortField string) int64 {
-	sortField = utils.CamelString(sortField)
+func GetSortValue(s interface{}, in *PageOptions) int64 {
+	SetPagingDefaultOptions(in)
+	sortField := utils.CamelString(in.SortField)
 	sElem := reflect.ValueOf(s).Elem()
 	// 是否存在字段
 	if ! sElem.FieldByName(sortField).IsValid() {
