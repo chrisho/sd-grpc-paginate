@@ -67,9 +67,9 @@ func SetPagingModeByPrimarySelectFieldAndSort(SortField, SortFieldTo string) (fi
 		// snake string
 		field = utils.SnakeString(field)
 		// 是否有排序后缀 _sort
-		if field != "id" && ! strings.HasSuffix(field, SortFieldSuffix) && !strings.HasSuffix(field, "_id") {
-			field = field + SortFieldSuffix
-		}
+		//if field != "id" && ! strings.HasSuffix(field, SortFieldSuffix) && !strings.HasSuffix(field, "_id") {
+		//	field = field + SortFieldSuffix
+		//}
 	}
 	// 排序方式
 	SortFieldTo = strings.ToLower(strings.Trim(SortFieldTo, " "))
